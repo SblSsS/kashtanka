@@ -28,3 +28,8 @@ group :test do
 	gem 'capybara'
 	gem 'database_cleaner'
 end
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
+gem 'cancan'

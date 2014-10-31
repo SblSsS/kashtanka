@@ -27,10 +27,14 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.6)
     arel (4.0.2)
+    autoprefixer-rails (3.1.2.20141016)
+      execjs
     bcrypt (3.1.7)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
+    bootstrap-sass (3.3.0.1)
+      sass (~> 3.2)
     builder (3.1.4)
     cancan (1.6.10)
     capybara (2.3.0)
@@ -174,7 +178,7 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.3.0)
       coffee-rails
-    tzinfo (0.3.41)
+    tzinfo (0.3.42)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -187,7 +191,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   better_errors
+  bootstrap-sass (~> 3.3.0)
   cancan
   capybara
   coffee-rails (~> 4.0.0)

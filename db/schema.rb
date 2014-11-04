@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014232144) do
+ActiveRecord::Schema.define(version: 20141031033749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20141014232144) do
   create_table "roles", force: true do |t|
     t.string "name"
   end
+
+  create_table "translations", force: true do |t|
+    t.integer "translatable_id"
+    t.string  "translatable_type"
+    t.string  "locale"
+    t.string  "field_name"
+    t.text    "field_translation"
+  end
+
+  add_index "translations", ["translatable_id"], name: "index_translations_on_translatable_id", using: :btree
 
   create_table "user_roles", force: true do |t|
     t.integer "user_id"

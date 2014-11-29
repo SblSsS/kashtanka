@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :roles, through: :user_roles
 
   #Validations
+  validates :email, uniqueness: true, presence: true
   validates :first_name, :last_name, presence: true, length: { maximum: 25 }
   validates :phone, numericality: true, if: "phone.present?"
 

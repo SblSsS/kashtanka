@@ -7,7 +7,10 @@ Kashtanka::Application.routes.draw do
   namespace :client do
   end
 
-  namespace :admin do
+  namespace :admin, path: 'adminka' do
+  	get '', to: 'home#index', as: :admin
+
+  	resources :users
   end
 
 end

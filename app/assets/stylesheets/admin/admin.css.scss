@@ -8,6 +8,14 @@
 
 	form.resource-form {
 		margin-top: 20px;
+		.chosen-container {
+			margin-bottom: 15px;
+			height: 30px;
+			ul.chosen-choices {
+				height: 30px; border-radius: 5px;
+				li, li input { height: 30px; }
+			} 
+		}
 	}
 }
 

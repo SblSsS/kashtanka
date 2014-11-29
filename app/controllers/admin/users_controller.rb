@@ -12,7 +12,8 @@ class Admin::UsersController < Admin::ResourcesController
 	private
 
 	def resource_params
-		params.require(:user).permit(:first_name, :last_name, :email, :phone, :password, :password_confirmation)
+		params.require(:user).permit(:first_name, :last_name, :email, :phone, :password, :password_confirmation, 
+																 role_ids: [])
 	end
 
 end

@@ -23,7 +23,7 @@ module Translatable
 						self.write_attribute(f.to_sym, value[:translation])
 					end
 				else
-					self.write_attribute(t.to_sym, value.to_s)
+					self.write_attribute(f.to_sym, value.to_s)
 				end
 			end
 

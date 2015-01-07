@@ -22,7 +22,7 @@ module Core
 			load_from_db.each do |setting|
 				instance_variable_set("@#{setting.name}", setting.value)
 				@setting_hash[setting.name.to_sym] = setting.value
-			end			
+			end
 		end
 
 		def save_hash
@@ -31,7 +31,7 @@ module Core
 			@setting_hash.each do |k,v|
 				non_db_settings[k] = v if !db_keys.include?(k)
 			end
-			
+
 			@preferences.update(prefs: non_db_settings)
 		end
 
@@ -45,6 +45,6 @@ module Core
 			settings << Setting.create_with(value: "Kashtanka v.1.0.0").find_or_create_by(name: "title").try(:id)
 			Setting.where("id NOT IN (?)",settings).each {|s| s.destroy}
 			Setting.where("id != ?", @preferences.id)
-		end		
+		end
 	end
 end

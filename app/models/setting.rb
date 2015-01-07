@@ -10,11 +10,11 @@ class Setting < ActiveRecord::Base
 
 	#Methods--------------------------------
 	def value
-		begin 
+		begin
 			parser_class = Object.const_get("Core::Parsers::#{self.parser}")
 		rescue
 			parser_class = nil
-		end 
+		end
 
 		if !parser.blank? && parser_class
 			parser_class.parse read_attribute(:value)
@@ -24,17 +24,18 @@ class Setting < ActiveRecord::Base
 	end
 
 	def field_type
-		begin 
+		begin
 			Object.const_get("Core::Parsers::#{self.parser}").field_type
 		rescue
 			:string
-		end 		
+		end
 	end
 
 	private
 
 		def update_config
-			Settings.refresh
+			puts "#{prefs.inspect}"
+			#Settings.refresh
 		end
 	#---------------------------------------
 

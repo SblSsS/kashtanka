@@ -1,5 +1,13 @@
 class Setting < ActiveRecord::Base
 
+	#Validations
+	validates :name, :value, presence: true
+
+	#Callbacks
+	after_update :update_config, if: "!prefs.present?"
+
+	serialize :prefs, Hash
+
 	#Methods--------------------------------
 	def value
 		begin 
@@ -14,6 +22,20 @@ class Setting < ActiveRecord::Base
 			read_attribute(:value)
 		end
 	end
+
+	def field_type
+		begin 
+			Object.const_get("Core::Parsers::#{self.parser}").field_type
+		rescue
+			:string
+		end 		
+	end
+
+	private
+
+		def update_config
+			Settings.refresh
+		end
 	#---------------------------------------
 
 end

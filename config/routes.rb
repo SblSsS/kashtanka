@@ -11,6 +11,7 @@ Kashtanka::Application.routes.draw do
   	get '', to: 'home#index', as: :admin
 
   	resources :users
+  	resources :settings
   end
 
 end

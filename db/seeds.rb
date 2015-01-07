@@ -14,4 +14,4 @@ administrator = User.create_with(first_name: "Admin", last_name: "Adminov",
  																 password: "aaaa1234", password_confirmation: "aaaa1234").
 										 find_or_create_by(email: "admin@kashtanka.com")
 
-administrator.roles << Role.find_by(name: roles.last)
+administrator.roles << Role.find_by(name: roles.last) if !administrator.roles.map(&:name).include?(roles.last)

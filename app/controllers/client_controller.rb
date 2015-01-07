@@ -4,6 +4,6 @@ class ClientController < ApplicationController
 	private
 
 	def load_publics
-		@title = Kashtan.config[:title]
+		@title = Settings.config[:title]
 	end
 end

@@ -92,7 +92,7 @@ class Admin::ResourcesController < AdminController
 
 	def load_entity
 		if params[:id]
-			model.find(params[:id])
+			model.exists?(id: params[:id]) ? model.find(params[:id]) : nil
 		elsif [:new, :create].include?(action)
 			model.new()
 		end

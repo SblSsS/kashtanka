@@ -3,8 +3,11 @@ class Setting < ActiveRecord::Base
 	#Validations
 	validates :name, :value, presence: true
 
+	#Scopes
+	scope :editable, -> { where("name != ?", "preferences") }
+
 	#Callbacks
-	after_update :update_config, if: "!prefs.present?"
+	after_update :update_config
 
 	serialize :prefs, Hash
 
@@ -34,8 +37,9 @@ class Setting < ActiveRecord::Base
 	private
 
 		def update_config
-			puts "#{prefs.inspect}"
-			#Settings.refresh
+			if name != "preferences"
+				Settings.refresh
+			end
 		end
 	#---------------------------------------
 

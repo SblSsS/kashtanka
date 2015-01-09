@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   	define_method "is_#{role}?" do
   		roles.map(&:name).include? role
   	end
-  end
+  end if Role.table_exists?
 
   def self.process_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|

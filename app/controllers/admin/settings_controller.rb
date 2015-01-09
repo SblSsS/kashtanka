@@ -1,6 +1,11 @@
 module Admin
 	class SettingsController < ResourcesController
 
+		def index
+			super
+			@settings = @settings.editable
+		end
+
 		def update
 			params[:config].each do |pair|
 				setting = Setting.find_by(name: pair.first)

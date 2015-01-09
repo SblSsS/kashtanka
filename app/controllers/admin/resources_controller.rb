@@ -1,6 +1,6 @@
 class Admin::ResourcesController < AdminController
 	before_action :load_resource
-
+	rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 	respond_to :html
 
 	def index
@@ -21,10 +21,10 @@ class Admin::ResourcesController < AdminController
 			flash[:notice] = t(:create_message, resource: model_name, scope: :flash)
 			respond_with(@resource) do |format|
 				format.html { redirect_to action: :index }
-			end			
+			end
 		else
 			respond_with(@resource) do |format|
-				format.html do 
+				format.html do
 					flash[:error] = @resource.errors.full_messages.join(", ")
 					render action: :new
 				end
@@ -40,7 +40,7 @@ class Admin::ResourcesController < AdminController
 			end
 		else
 			respond_with(@resource) do |format|
-				format.html do 
+				format.html do
 					flash[:error] = @resource.errors.full_messages.join(", ")
 					render action: :edit
 				end
@@ -52,57 +52,64 @@ class Admin::ResourcesController < AdminController
 		if instance_variable_defined? "@#{resource_name}"
 			instance_variable_get("@#{resource_name}").destroy
 			flash[:notice] = t(:destroy_message, resource: model_name, scope: :flash)
-		end 
+		end
 		redirect_to action: :index
 	end
 
 	protected
 
-	def model_name
-		"#{controller_name}".singularize.capitalize
-	end
+	  def render_404(exception = nil)
+	    respond_to do |format|
+	      format.html { render :status => :not_found, :file    => "#{::Rails.root}/public/404", :formats => [:html], :layout => nil}
+	      format.all  { render :status => :not_found, :nothing => true }
+	    end
+	  end
 
-	def resource_name
-		"#{controller_name}".singularize
-	end
-
-	def model
-		model_name.constantize
-	end
-
-	def action
-		params[:action].to_sym
-	end
-
-	def load_resource
-		if params[:id] || [:new, :create].include?(action)
-			@resource ||= load_entity
-			authorize! action, @resource
-
-			instance_variable_set( "@#{resource_name}", @resource )
-		else
-			@collection ||= load_collection
-			#Think how to authorize collection
-
-			instance_variable_set( "@#{controller_name}", @collection )
+		def model_name
+			"#{controller_name}".singularize.camelize
 		end
 
-		@active_tab = controller_name
-	end
-
-	def load_entity
-		if params[:id]
-			model.exists?(id: params[:id]) ? model.find(params[:id]) : nil
-		elsif [:new, :create].include?(action)
-			model.new()
+		def resource_name
+			"#{controller_name}".singularize
 		end
-	end
 
-	def load_collection
-		model.all
-	end
+		def model
+			model_name.constantize
+		end
 
-	def resource_params
-		params[resource_name].present? ? params.require(resource_name).permit! : ActionController::Parameters.new
-	end
+		def action
+			params[:action].to_sym
+		end
+
+		def load_resource
+			if params[:id] || [:new, :create].include?(action)
+				@resource ||= load_entity
+				authorize! action, @resource
+
+				instance_variable_set( "@#{resource_name}", @resource )
+			else
+				@collection ||= load_collection
+				#Think how to authorize collection
+
+				instance_variable_set( "@#{controller_name}", @collection )
+			end
+
+			@active_tab = controller_name
+		end
+
+		def load_entity
+			if params[:id]
+				model.exists?(id: params[:id]) ? model.find(params[:id]) : nil
+			elsif [:new, :create].include?(action)
+				model.new()
+			end
+		end
+
+		def load_collection
+			model.all
+		end
+
+		def resource_params
+			params[resource_name].present? ? params.require(resource_name).permit! : ActionController::Parameters.new
+		end
 end

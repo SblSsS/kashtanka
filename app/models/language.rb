@@ -5,6 +5,14 @@ class Language < ActiveRecord::Base
 
 	#Methods-----------------------------
 
+	def publish
+		update(publish: !published)
+	end
+
+	def update
+		super if iso != "en"
+	end
+
 	def destroy
 		super if iso != "en"
 	end

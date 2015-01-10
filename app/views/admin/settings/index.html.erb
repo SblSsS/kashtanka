@@ -1,0 +1,15 @@
+<h1 class="glyphicon glyphicon-wrench">
+	<%= " #{t(:index, resource: @active_tab.capitalize, scope: :action_names)}" %>
+</h1>
+
+<div class="clear"></div>
+
+<%= simple_form_for :config, url: admin_setting_path('update'), method: :patch, html: { class: 'col-md-5 col-md-offset-1 resource-form' }, role: 'form' do |f| %>
+  <div class="form-group">
+	  <% @settings.each do |setting| %>
+	  	<%= setting_field f, setting %>
+	  <% end %>
+  </div>
+
+  <%= f.button :submit, class: 'btn btn-default' %>
+<% end %>

@@ -20,4 +20,5 @@ en:
     update_message:  "%{resource} was successfully updated"
     destroy_message: "%{resource} was destroyed" 
     create_message:	 "%{resource} was successfully created"
+    setting_error:   "Some settings were not saved"
 

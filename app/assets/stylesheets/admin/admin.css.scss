@@ -16,6 +16,14 @@
 				li, li input { height: 30px; }
 			} 
 		}
+
+		input[type=checkbox] { width: 10px; float: left; }
+
+		div.input { 
+			margin-bottom: 15px; 
+			&.boolean label { margin-top: 10px; margin-left: 10px; }
+		}
+		
 	}
 }
 

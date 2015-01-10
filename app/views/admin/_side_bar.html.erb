@@ -1,7 +1,7 @@
 <aside>
 	<ul class="nav nav-pills nav-stacked">
 		<%= content_tag :li, class: @active_tab == 'settings' ? 'active' : '' do %>
-			<%= link_to(" #{t(:settings)}", "#", class: "glyphicon glyphicon-wrench") %></li>
+			<%= link_to(" #{t(:settings)}", admin_settings_path, class: "glyphicon glyphicon-wrench") %></li>
 		<% end %>
 		<%= content_tag :li, class: @active_tab == 'users' ? 'active' : '' do %>
 			<%= link_to(" #{t(:users)}", admin_users_path, class: "glyphicon glyphicon-user") %></li>

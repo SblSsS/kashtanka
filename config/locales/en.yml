@@ -14,7 +14,8 @@ en:
     new: 				"Create %{resource}"
     index:			"%{resource}"
 
-  delete_confirmation: "Are you sure?"
+  delete_confirmation:  "Are you sure?"
+  nothing_found:        "Nothing was found"
 
   flash:
     update_message:  "%{resource} was successfully updated"

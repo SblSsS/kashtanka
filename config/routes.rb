@@ -12,6 +12,7 @@ Kashtanka::Application.routes.draw do
 
   	resources :users
   	resources :settings
+  	resources :languages
   end
 
 end

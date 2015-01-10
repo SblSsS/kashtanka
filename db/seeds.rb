@@ -15,3 +15,10 @@ administrator = User.create_with(first_name: "Admin", last_name: "Adminov",
 										 find_or_create_by(email: "admin@kashtanka.com")
 
 administrator.roles << Role.find_by(name: roles.last) if !administrator.roles.map(&:name).include?(roles.last)
+
+#Languages seeds
+puts "Seeding default language ..."
+
+default_language = Language.find_or_create_by(name: "English", iso: "en", published: true)
+
+

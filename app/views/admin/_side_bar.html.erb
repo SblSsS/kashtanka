@@ -9,5 +9,8 @@
 		<%= content_tag :li, class: @active_tab == 'languages' ? 'active' : '' do %>
 			<%= link_to(" #{t(:languages)}", admin_languages_path, class: "glyphicon glyphicon-globe") %></li>
 		<% end %>
+		<%= content_tag :li, class: @active_tab == 'posts' ? 'active' : '' do %>
+			<%= link_to(" #{t(:posts)}", admin_posts_path, class: "glyphicon glyphicon-list-alt") %></li>
+		<% end %>
 	</ul>
 </aside>

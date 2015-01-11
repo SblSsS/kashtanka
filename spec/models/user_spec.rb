@@ -53,6 +53,29 @@ RSpec.describe User, :type => :model do
   	end
   end
 
+  describe 'scopes' do
+    before(:each) do
+      @user1 = FactoryGirl.create(:user, first_name: 'Ivan', last_name: 'Ivanov', email: 'ivan@mail.ru')
+      @user2 = FactoryGirl.create(:user_administrator, first_name: 'Sidor', last_name: 'Sidorov', email: 'sidor@mail.ru')
+    end
+
+    it 'can be filtered by name' do
+      expect(User.by_name('Sid')).to include(@user2)
+      expect(User.by_name('Sid')).not_to include(@user1)
+    end
+
+    it 'can be filtered by email' do
+      expect(User.by_email('Iva')).to include(@user1)
+      expect(User.by_email('Iva')).not_to include(@user2)
+    end
+
+    it 'can be filtered by roles' do
+      id = Role.find_by(name: 'administrator').id
+      expect(User.by_roles([id])).to include(@user2)
+      expect(User.by_roles([id])).not_to include(@user1)
+    end
+  end
+
   describe 'methods' do
 
   	let(:user) { FactoryGirl.create(:user) }
@@ -60,5 +83,9 @@ RSpec.describe User, :type => :model do
   	it 'has a full name' do
   		expect(user.name).to eql("#{user.first_name} #{user.last_name}")
   	end
+
+    it 'is filterable' do
+      expect(User).to respond_to(:filter)
+    end
   end
 end

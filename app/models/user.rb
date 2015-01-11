@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Filterable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,7 +19,9 @@ class User < ActiveRecord::Base
   after_create :after_create
 
   #Scopes
-  scope :page, ->(page,limit){limit(limit).offset((page-1)*limit)}
+  scope :by_name,   -> (name)  { where("first_name ILIKE '%#{name}%' OR last_name ILIKE '%#{name}%'") }
+  scope :by_email,  -> (email) { where("email ILIKE '#{email}%'") }
+  scope :by_roles,  -> (ids)   { joins(:roles).where("roles.id IN (?)", ids).uniq } 
 
   #Methods----------------------------------------------------------
 

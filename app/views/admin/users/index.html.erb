@@ -3,19 +3,31 @@
 	<%= link_to "", new_admin_user_path, class: "glyphicon glyphicon-plus" %>
 </h1>
 
-<table class="table table-striped resources">
-  <thead>
-  	<th><%= t(:name) %></th>
-  	<th><%= t(:email) %></th>
-  	<th></th>
-  </thead>
-  <tbody>
-  	<% @users.each do |user| %>
-  		<tr>
-	  		<td><%= link_to(user.name, edit_admin_user_path(user)) %></td>
-	  		<td><%= user.email %></td>
-	  		<td><%= link_to("", admin_user_path(user), method: :delete, class: "glyphicon glyphicon-remove", confirm: "#{t(:delete_confirmation)}") %></td>
-  		</tr>
-  	<% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="md-col-12">
+    <%= render 'filter' %>
+  </div>
+</div>
+
+<% if @users.any? %>
+  <table class="table table-striped resources">
+    <thead>
+    	<th><%= t(:name) %></th>
+    	<th><%= t(:email) %></th>
+    	<th></th>
+    </thead>
+    <tbody>
+    	<% @users.each do |user| %>
+    		<tr>
+  	  		<td><%= link_to(user.name, edit_admin_user_path(user)) %></td>
+  	  		<td><%= user.email %></td>
+  	  		<td><%= link_to("", admin_user_path(user), method: :delete, class: "glyphicon glyphicon-remove", confirm: "#{t(:delete_confirmation)}") %></td>
+    		</tr>
+    	<% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate @users %>
+<% else %>
+  <%= content_tag(:p, t(:nothing_found)) %>
+<% end %>

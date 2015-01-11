@@ -1,3 +1,6 @@
+$ksh_grey: #cccccc;
+$ksh_link: #428bca;
+
 #admin-content {
 	border-left: 1px solid black;
 	padding-left: 20px;
@@ -28,6 +31,29 @@
 			&.boolean label { margin-top: 10px; margin-left: 10px; }
 		}
 		
+	}
+
+	.filter-form {
+		input { height: 25px; }
+		.chosen-container {
+			height: 25px;
+			ul.chosen-choices {
+				height: 20px; border-radius: 5px;
+				li, li input { height: 25px; }
+			}
+		}
+		.filter-btn { margin-top: 15px; height: 30px; }
+	}
+
+	div.pagination {
+		.previous_page, .next_page, .current, a { border: 1px solid $ksh_grey; padding: 2px 5px; }
+		.disabled { color: $ksh_grey; }
+		a { 
+			text-decoration: none;
+			&:hover { background-color: $ksh_link; color: white; }  
+		}
+
+		.current { background-color: $ksh_link; color: white; font-style: normal; }
 	}
 }
 

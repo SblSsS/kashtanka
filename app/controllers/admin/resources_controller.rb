@@ -17,7 +17,7 @@ class Admin::ResourcesController < AdminController
     flash[:notice] = t(:publish_message, resource: model_name, scope: :flash)
 
     respond_to do |format|
-      format.html { redirect_to action: :index }
+      format.html { redirect_to({action: :index}.merge(params.slice(:page))) }
     end
 	end
 
@@ -115,10 +115,24 @@ class Admin::ResourcesController < AdminController
 		end
 
 		def load_collection
-			model.all
+			col = model.all
+
+			if model.respond_to?(:filter)
+				col = col.filter(filter_params)
+			end 
+
+			if model.respond_to?(:paginate)
+				col = col.paginate(:page => params[:page], :per_page => 20)
+			end
+
+			col
 		end
 
 		def resource_params
 			params[resource_name].present? ? params.require(resource_name).permit! : ActionController::Parameters.new
+		end
+
+		def filter_params
+			{}
 		end
 end

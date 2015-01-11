@@ -16,4 +16,8 @@ class Admin::UsersController < Admin::ResourcesController
 																 role_ids: [])
 	end
 
+	def filter_params
+		params.slice(:by_name, :by_email, :by_roles)
+	end
+
 end

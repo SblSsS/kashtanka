@@ -35,6 +35,11 @@ RSpec.describe Language, :type => :model do
 			expect(FactoryGirl.build(:language, iso: nil)).not_to be_valid
 		end
 
+		it 'is not valid with existing iso' do
+			FactoryGirl.create(:language)
+			expect(FactoryGirl.build(:language)).not_to be_valid
+		end
+
 	end
 
 	describe 'methods' do

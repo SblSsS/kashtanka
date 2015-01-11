@@ -2,15 +2,12 @@ class Language < ActiveRecord::Base
 
 	#Validations
 	validates :name, :iso, presence: true
+	validates :iso, uniqueness: true
 
 	#Methods-----------------------------
 
 	def publish
-		update(publish: !published)
-	end
-
-	def update
-		super if iso != "en"
+		update(published: !published) if iso != "en"
 	end
 
 	def destroy

@@ -8,6 +8,7 @@ en:
   users: 			"Users"
   languages: 	"Languages"
   settings:		"Settings"
+  posts:      "Posts"
   name:       "Name"
   filter:     "Filter"
 
@@ -25,4 +26,38 @@ en:
     create_message:	 "%{resource} was successfully created"
     setting_error:   "Some settings were not saved"
     publish_message: "%{resource} visability status was changed"
+
+  number:
+    human:
+      storage_units:
+        format: "%n %u"
+        units:
+          mb: "MB"
+          byte: "Byte"
+
+  date:
+    order:
+      - :day
+      - :month
+      - :year
+
+    formats:
+      default: "%d.%m.%Y"
+      short: "%d %b"
+      long: "%d %B %Y"
+      schedule: "%B, %Y"
+
+    day_names:        [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    abbr_day_names:   [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+
+    month_names:      [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+
+  time:
+    formats:
+      default:      "%d.%m.%Y"
+      schedule:     "%B, %Y"
+      message:      "%B %d, %H:%M"
+      message_read: "Read at %B %d, %H:%M"
+      order:        "%d of %B %Y at %H:%M"
 

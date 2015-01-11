@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
   after_create :after_create
 
   #Scopes
-  scope :by_name,   -> (name)  { where("first_name LIKE '%#{name}%' OR last_name ILIKE '%#{name}%'") }
+  scope :by_name,   -> (name)  { where("first_name ILIKE '%#{name}%' OR last_name ILIKE '%#{name}%'") }
   scope :by_email,  -> (email) { where("email ILIKE '#{email}%'") }
-  scope :by_roles,  -> (ids)   { joins(:roles).where("roles.id IN (?)", ids) } 
+  scope :by_roles,  -> (ids)   { joins(:roles).where("roles.id IN (?)", ids).uniq } 
 
   #Methods----------------------------------------------------------
 

@@ -29,5 +29,16 @@
 		}
 		
 	}
+
+	div.pagination {
+		.previous_page, .next_page, .current, a { border: 1px solid #CCCCCC; padding: 2px 5px; }
+		.disabled { color: #cccccc; }
+		a { 
+			text-decoration: none;
+			&:hover { background-color: #428bca; color: white; }  
+		}
+
+		.current { background-color: #428bca; color: white; font-style: normal; }
+	}
 }
 

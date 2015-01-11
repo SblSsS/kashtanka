@@ -16,12 +16,14 @@
     		<tr>
   	  		<td><%= language.iso != "en" ? link_to(language.name, edit_admin_language_path(language)) : language.name %></td>
   	  		<td><%= language.iso %></td>
-          <td><%= language.iso != "en" ? link_to("", publish_admin_language_path(language), method: :post, class: publish_class(language)) : content_tag(:i, "", class: publish_class(language)) %></td>
-  	  		<td><%= link_to("", admin_language_path(language), method: :delete, class: "glyphicon glyphicon-remove", confirm: "#{t(:delete_confirmation)}") if language.iso != "en" %></td>
+          <td><%= language.iso != "en" ? link_to("", publish_admin_language_path(language, params.slice(:page)), method: :post, class: publish_class(language)) : content_tag(:i, "", class: publish_class(language)) %></td>
+  	  		<td><%= link_to("", admin_language_path(language), method: :delete, class: "glyphicon glyphicon-remove", data: { confirm: "#{t(:delete_confirmation)}" } ) if language.iso != "en" %></td>
     		</tr>
     	<% end %>
     </tbody>
   </table>
+
+  <%= will_paginate @languages %>
 <% else %>
   <%= content_tag(:p, t(:nothing_found)) %>
 <% end %>

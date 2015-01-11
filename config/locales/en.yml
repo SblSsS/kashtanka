@@ -22,4 +22,5 @@ en:
     destroy_message: "%{resource} was destroyed" 
     create_message:	 "%{resource} was successfully created"
     setting_error:   "Some settings were not saved"
+    publish_message: "%{resource} visability status was changed"
 

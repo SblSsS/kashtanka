@@ -12,6 +12,13 @@ Kashtanka::Application.routes.draw do
 
   	resources :users
   	resources :settings
+  	resources :languages
+
+  	[:languages].each do |r|
+  		resources r do
+  			post :publish, on: :member
+  		end
+  	end
   end
 
 end

@@ -10,6 +10,15 @@ class Admin::ResourcesController < AdminController
 	end
 
 	def publish
+		return unless @resource.respond_to?(:publish)
+
+    @resource.publish
+
+    flash[:notice] = t(:publish_message, resource: model_name, scope: :flash)
+
+    respond_to do |format|
+      format.html { redirect_to action: :index }
+    end
 	end
 
 	def change_position

@@ -14,5 +14,9 @@ module Admin
 
 		end
 
+		def publish_class resource
+			resource.published ? "glyphicon glyphicon-eye-open publish" : "glyphicon glyphicon-eye-close unpublish"
+		end
+
 	end
 end

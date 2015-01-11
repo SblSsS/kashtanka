@@ -14,11 +14,13 @@ en:
     new: 				"Create %{resource}"
     index:			"%{resource}"
 
-  delete_confirmation: "Are you sure?"
+  delete_confirmation:  "Are you sure?"
+  nothing_found:        "Nothing was found"
 
   flash:
     update_message:  "%{resource} was successfully updated"
     destroy_message: "%{resource} was destroyed" 
     create_message:	 "%{resource} was successfully created"
     setting_error:   "Some settings were not saved"
+    publish_message: "%{resource} visability status was changed"
 

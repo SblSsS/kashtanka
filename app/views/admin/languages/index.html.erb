@@ -1,0 +1,27 @@
+<h1 class="glyphicon glyphicon-globe">
+	<%= " #{t(:index, resource: Language.model_name.human, scope: :action_names)}" %>
+	<%= link_to "", new_admin_language_path, class: "glyphicon glyphicon-plus" %>
+</h1>
+
+<% if @languages.any? %>
+  <table class="table table-striped resources">
+    <thead>
+    	<th><%= Language.human_attribute_name(:name) %></th>
+    	<th><%= Language.human_attribute_name(:iso) %></th>
+      <th><%= Language.human_attribute_name(:published) %></th>
+    	<th></th>
+    </thead>
+    <tbody>
+    	<% @languages.each do |language| %>
+    		<tr>
+  	  		<td><%= language.iso != "en" ? link_to(language.name, edit_admin_language_path(language)) : language.name %></td>
+  	  		<td><%= language.iso %></td>
+          <td><%= language.iso != "en" ? link_to("", publish_admin_language_path(language), method: :post, class: publish_class(language)) : content_tag(:i, "", class: publish_class(language)) %></td>
+  	  		<td><%= link_to("", admin_language_path(language), method: :delete, class: "glyphicon glyphicon-remove", confirm: "#{t(:delete_confirmation)}") if language.iso != "en" %></td>
+    		</tr>
+    	<% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%= content_tag(:p, t(:nothing_found)) %>
+<% end %>

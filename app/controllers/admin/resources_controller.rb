@@ -14,6 +14,8 @@ class Admin::ResourcesController < AdminController
 
     @resource.publish
 
+    flash[:notice] = t(:publish_message, resource: model_name, scope: :flash)
+
     respond_to do |format|
       format.html { redirect_to action: :index }
     end

@@ -8,6 +8,8 @@ en:
   users: 			"Users"
   languages: 	"Languages"
   settings:		"Settings"
+  name:       "Name"
+  filter:     "Filter"
 
   action_names:
     edit: 			"Edit %{resource}"

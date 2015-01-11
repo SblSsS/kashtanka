@@ -3,6 +3,12 @@
 	<%= link_to "", new_admin_user_path, class: "glyphicon glyphicon-plus" %>
 </h1>
 
+<div class="row">
+  <div class="md-col-12">
+    <%= render 'filter' %>
+  </div>
+</div>
+
 <% if @users.any? %>
   <table class="table table-striped resources">
     <thead>

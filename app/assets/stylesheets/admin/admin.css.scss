@@ -1,3 +1,6 @@
+$ksh_grey: #cccccc;
+$ksh_link: #428bca;
+
 #admin-content {
 	border-left: 1px solid black;
 	padding-left: 20px;
@@ -31,14 +34,14 @@
 	}
 
 	div.pagination {
-		.previous_page, .next_page, .current, a { border: 1px solid #CCCCCC; padding: 2px 5px; }
-		.disabled { color: #cccccc; }
+		.previous_page, .next_page, .current, a { border: 1px solid $ksh_grey; padding: 2px 5px; }
+		.disabled { color: $ksh_grey; }
 		a { 
 			text-decoration: none;
-			&:hover { background-color: #428bca; color: white; }  
+			&:hover { background-color: $ksh_link; color: white; }  
 		}
 
-		.current { background-color: #428bca; color: white; font-style: normal; }
+		.current { background-color: $ksh_link; color: white; font-style: normal; }
 	}
 }
 

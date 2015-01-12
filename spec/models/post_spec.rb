@@ -44,6 +44,14 @@ RSpec.describe Post, :type => :model do
 
 	end
 
+	describe 'scopes' do
+
+		it 'is published' do
+			expect(Post.published).to include(post)
+		end
+
+	end
+
 	describe 'methods' do
 
 	end

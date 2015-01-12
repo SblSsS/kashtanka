@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+	include Resoursable
 
 	#Associations
 	belongs_to :user
@@ -8,7 +9,7 @@ class Post < ActiveRecord::Base
 	validates :title, uniqueness: true
 
 	#Methods--------------------------------
-	
+
 	#---------------------------------------
 
 

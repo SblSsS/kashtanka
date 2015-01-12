@@ -10,6 +10,10 @@ module Resoursable
     self.update(published: !self.published)
   end
 
+  def translatable?
+    respond_to? :translations
+  end
+
   module ClassMethods
 
   end

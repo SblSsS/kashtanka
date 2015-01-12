@@ -1,5 +1,8 @@
 class Post < ActiveRecord::Base
 	include Resoursable
+	include Translatable
+
+	acts_as_translatable :title, :body
 
 	#Associations
 	belongs_to :user

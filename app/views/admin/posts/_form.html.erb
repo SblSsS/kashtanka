@@ -1,10 +1,39 @@
-<%= simple_form_for @post, url: @post.id ? admin_post_path(@post) : admin_posts_path, html: { class: 'col-md-5 col-md-offset-1 resource-form' }, role: 'form' do |f| %>
-  <div class="form-group">
-  	<%= f.input :user_id, as: :hidden, input_html: { class: 'form-control', value: current_user.id } %>
-    <%= f.input :title,     input_html: { class: 'form-control' } %>
-    <%= f.input :body,      input_html: { class: 'form-control' } %>
-    <%= f.input :published, input_html: { class: 'form-control' } %>
+<%= simple_form_for @post, url: @post.id ? admin_post_path(@post) : admin_posts_path, html: { class: 'col-md-11 col-md-offset-1 resource-form' }, role: 'form' do |f| %>
+
+  <div class="form-group col-md-6">
+  	<% if @post.translatable? && Settings.config[:multilanguage] && Language.published.count > 1 %>
+  		<%= f.fields_for :translations_attributes do |t| %>
+	  		<div role="tabpanel">
+				  <ul class="nav nav-tabs" role="tablist">
+				  	<% Language.published.each do |l| %>
+					    <li role="presentation" class="<%= l == Language.published.first ? 'active' : '' %>">
+					    	<a href="#<%= l.iso %>" aria-controls="<%= l.iso %>" role="tab" data-toggle="tab"><%= l.name %></a>
+					    </li>
+				    <% end %>
+				  </ul>
+
+				  <div class="tab-content">
+				  	<% Language.published.each do |l| %>
+				    	<div role="tabpanel" class="tab-pane <%= l == Language.published.first ? 'active' : '' %>" id="<%= l.iso %>">
+					    	<%= t.input :title, input_html: { class: 'form-control' } %>
+					    	<%= t.input :body,  input_html: { class: 'form-control' } %>
+				    	</div>
+				    <% end %>
+				  </div>
+	  		</div>
+  		<% end %>
+  	<% else %>
+    	<%= f.input :title,     input_html: { class: 'form-control' } %>
+    	<%= f.input :body,      input_html: { class: 'form-control' } %>
+    <% end %>
   </div>
 
-  <%= f.button :submit, class: 'btn btn-default' %>
+  <div class="form-group col-md-6">
+  	<%= f.input :user_id, as: :hidden, input_html: { class: 'form-control', value: current_user.id } %>
+  	<%= f.input :published, input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="col-md-12">
+  	<%= f.button :submit, class: 'btn btn-default' %>
+  </div>
 <% end %>

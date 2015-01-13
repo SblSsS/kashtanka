@@ -13,10 +13,12 @@
 				  </ul>
 
 				  <div class="tab-content">
+				  	<% i = 0 %>
 				  	<% Language.published.each do |l| %>
 				    	<div role="tabpanel" class="tab-pane <%= l == Language.published.first ? 'active' : '' %>" id="<%= l.iso %>">
-					    	<%= t.input :title, input_html: { class: 'form-control' } %>
-					    	<%= t.input :body,  input_html: { class: 'form-control' } %>
+				    		<%= translation_fieldset t, 'title', @post, i, l.iso %>
+				    		<%= translation_fieldset t, 'body', @post, i+1, l.iso, as: :text %>
+				    		<% i = i + 2 %>
 				    	</div>
 				    <% end %>
 				  </div>

@@ -1,7 +1,7 @@
 <%= simple_form_for @post, url: @post.id ? admin_post_path(@post) : admin_posts_path, html: { class: 'col-md-11 col-md-offset-1 resource-form' }, role: 'form' do |f| %>
 
   <div class="form-group col-md-6">
-  	<% if @post.translatable? && Settings.config[:multilanguage] && Language.published.count > 1 %>
+  	<% if @post.translatable? && Settings.config[:multilanguage] && Language.published.count > 1 && @post.id %>
   		<%= f.fields_for :translations_attributes do |t| %>
 	  		<div role="tabpanel">
 				  <ul class="nav nav-tabs" role="tablist">
@@ -13,12 +13,14 @@
 				  </ul>
 
 				  <div class="tab-content">
-				  	<% i = 0 %>
+				  	<% i = -1 %>
 				  	<% Language.published.each do |l| %>
 				    	<div role="tabpanel" class="tab-pane <%= l == Language.published.first ? 'active' : '' %>" id="<%= l.iso %>">
-				    		<%= translation_fieldset t, 'title', @post, i, l.iso %>
-				    		<%= translation_fieldset t, 'body', @post, i+1, l.iso, as: :text %>
-				    		<% i = i + 2 %>
+				    		<% Post::TRANSLATABLE_FIELDS.each do |field| %>
+				    			<% i += 1 %>
+				    			<%= translation_fieldset t, field, @post, i, l.iso, 
+				    					as: Post.columns_hash[field.to_s].type %>
+				    		<% end %>
 				    	</div>
 				    <% end %>
 				  </div>

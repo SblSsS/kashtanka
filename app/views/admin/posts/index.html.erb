@@ -12,6 +12,7 @@
 <% if @posts.any? %>
   <table class="table table-striped resources">
     <thead>
+      <th><%= PostImage.model_name.human %></th>
     	<th><%= Post.human_attribute_name(:title) %></th>
     	<th><%= Post.human_attribute_name(:body) %></th>
       <th><%= Post.human_attribute_name(:created_at) %></th>
@@ -21,6 +22,7 @@
     <tbody>
     	<% @posts.each do |post| %>
     		<tr>
+          <td><%= link_to image_tag(post.post_image.attachment.url(:thumb)), edit_admin_post_path(post) if post.post_image %></td>
   	  		<td><%= link_to(post.title, edit_admin_post_path(post)) %></td>
   	  		<td><%= "#{post.body[0..50]}..." %></td>
           <td><%= l(post.created_at, format: :message) %></td>

@@ -27,6 +27,12 @@ RSpec.describe Post, :type => :model do
 
 	end
 
+	describe 'associations' do
+		it 'has image' do
+			expect(subject).to respond_to(:post_image)
+		end
+	end
+
 	describe 'validations' do
 
 		it 'has valid factory' do

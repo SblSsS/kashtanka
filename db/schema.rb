@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150111221953) do
+ActiveRecord::Schema.define(version: 20150114211138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assets", force: true do |t|
+    t.integer  "viewable_id"
+    t.string   "viewable_type"
+    t.string   "type"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.string   "alt"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "assets", ["viewable_id"], name: "index_assets_on_viewable_id", using: :btree
+  add_index "assets", ["viewable_type", "type"], name: "index_assets_on_viewable_type_and_type", using: :btree
 
   create_table "languages", force: true do |t|
     t.string  "name"

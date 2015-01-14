@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Post, :type => :model do
+	before do
+		FactoryGirl.create(:language)
+	end
+
 	let(:post) { FactoryGirl.create(:post) }
 
 	describe 'attributes' do

@@ -1,0 +1,30 @@
+<% if resource.translatable? && Settings.config[:multilanguage] && Language.published.count > 1 && resource.id %>
+	<%= form.fields_for :translations_attributes do |t| %>
+		<div role="tabpanel">
+		  <ul class="nav nav-tabs" role="tablist">
+		  	<% Language.published.each do |l| %>
+			    <li role="presentation" class="<%= l == Language.published.first ? 'active' : '' %>">
+			    	<a href="#<%= l.iso %>" aria-controls="<%= l.iso %>" role="tab" data-toggle="tab"><%= l.name %></a>
+			    </li>
+		    <% end %>
+		  </ul>
+
+		  <div class="tab-content">
+		  	<% i = -1 %>
+		  	<% Language.published.each do |l| %>
+		    	<div role="tabpanel" class="tab-pane <%= l == Language.published.first ? 'active' : '' %>" id="<%= l.iso %>">
+		    		<% resource.class::TRANSLATABLE_FIELDS.each do |field| %>
+		    			<% i += 1 %>
+		    			<%= translation_fieldset t, field, resource, i, l.iso, 
+		    					as: resource.class.columns_hash[field.to_s].type %>
+		    		<% end %>
+		    	</div>
+		    <% end %>
+		  </div>
+		</div>
+	<% end %>
+<% else %>
+	<% resource.class::TRANSLATABLE_FIELDS.each do |field| %>
+		<%= form.input field, input_html: { class: 'form-control' } %>
+	<% end %>
+<% end %>

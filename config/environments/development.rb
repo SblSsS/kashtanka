@@ -30,4 +30,9 @@ Kashtanka::Application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  config.paperclip_defaults = {
+    url: '/images/:class/:id/:style/:basename.:extension',
+    path: ':rails_root/public/images/:class/:id/:style/:basename.:extension'
+  }
 end

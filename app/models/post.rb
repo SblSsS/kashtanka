@@ -12,9 +12,15 @@ class Post < ActiveRecord::Base
 	validates :title, :body, presence: true
 	validates :title, uniqueness: true
 
-	accepts_nested_attributes_for :post_image, reject_if: 'attachment.blank?'
+	accepts_nested_attributes_for :post_image, reject_if: :image_invalid?
 
 	#Methods--------------------------------
+
+	private
+
+		def image_invalid? attributed
+			attributed[:attachment].blank?
+		end
 
 	#---------------------------------------
 

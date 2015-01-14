@@ -29,7 +29,9 @@ RSpec.describe Asset, :type => :model do
   end
 
   describe 'validations' do
-
+  	it 'has valid factory' do
+  		expect(FactoryGirl.build(:asset)).to be_valid
+  	end
   end
 
   describe 'methods' do

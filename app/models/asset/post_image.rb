@@ -1,0 +1,2 @@
+class PostImage < Asset
+end

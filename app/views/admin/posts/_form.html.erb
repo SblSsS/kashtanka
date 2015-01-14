@@ -1,35 +1,7 @@
 <%= simple_form_for @post, url: @post.id ? admin_post_path(@post) : admin_posts_path, html: { class: 'col-md-11 col-md-offset-1 resource-form' }, role: 'form' do |f| %>
 
   <div class="form-group col-md-6">
-  	<% if @post.translatable? && Settings.config[:multilanguage] && Language.published.count > 1 && @post.id %>
-  		<%= f.fields_for :translations_attributes do |t| %>
-	  		<div role="tabpanel">
-				  <ul class="nav nav-tabs" role="tablist">
-				  	<% Language.published.each do |l| %>
-					    <li role="presentation" class="<%= l == Language.published.first ? 'active' : '' %>">
-					    	<a href="#<%= l.iso %>" aria-controls="<%= l.iso %>" role="tab" data-toggle="tab"><%= l.name %></a>
-					    </li>
-				    <% end %>
-				  </ul>
-
-				  <div class="tab-content">
-				  	<% i = -1 %>
-				  	<% Language.published.each do |l| %>
-				    	<div role="tabpanel" class="tab-pane <%= l == Language.published.first ? 'active' : '' %>" id="<%= l.iso %>">
-				    		<% Post::TRANSLATABLE_FIELDS.each do |field| %>
-				    			<% i += 1 %>
-				    			<%= translation_fieldset t, field, @post, i, l.iso, 
-				    					as: Post.columns_hash[field.to_s].type %>
-				    		<% end %>
-				    	</div>
-				    <% end %>
-				  </div>
-	  		</div>
-  		<% end %>
-  	<% else %>
-    	<%= f.input :title,     input_html: { class: 'form-control' } %>
-    	<%= f.input :body,      input_html: { class: 'form-control' } %>
-    <% end %>
+  	<%= render partial: 'admin/shared/translatable_form', locals: { form: f, resource: @post } %>
   </div>
 
   <div class="form-group col-md-6">

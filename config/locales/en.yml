@@ -5,6 +5,18 @@ en:
       messages:
         blank: "must be provided"
 
+    models:
+      post:         'Article'
+      post_image:   'Main image'
+
+    attributes:
+      post:
+        post_image: 'Main Image'
+        slug:       'Url'
+
+      asset:
+        attachment: 'Image'
+
   users: 			"Users"
   languages: 	"Languages"
   settings:		"Settings"

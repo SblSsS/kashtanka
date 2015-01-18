@@ -4,7 +4,7 @@
   	<%= render partial: 'admin/shared/translatable_form', locals: { form: f, resource: @post } %>
   </div>
 
-  <div class="form-group col-md-6">
+  <div class="form-group col-md-4">
   	<%= f.input :user_id, as: :hidden, input_html: { class: 'form-control', value: current_user.id } %>
   	<%= f.input :published, input_html: { class: 'form-control' } %>
 
@@ -18,6 +18,8 @@
   		<%= image.input :id, as: :hidden %>
   		<%= image.input :attachment %>
   	<% end %>
+
+    <%= f.input :slug, input_html: { class: 'form-control' } if @post.id %>
   </div>
 
   <div class="col-md-12">

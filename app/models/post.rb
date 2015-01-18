@@ -1,6 +1,9 @@
 class Post < ActiveRecord::Base
 	include Resoursable
 	include Translatable
+  extend  FriendlyId
+
+  friendly_id :title, use: :slugged
 
 	acts_as_translatable :title, :body
 

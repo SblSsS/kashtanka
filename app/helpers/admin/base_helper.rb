@@ -39,5 +39,10 @@ module Admin
 			(id + name + iso + value).html_safe
 		end
 
+		def tags_input form, resource
+			form.association :tags, collection: resource.class.tag_counts_on(:tags).map(&:name), selected: resource.tag_list, 
+										input_html: { class: 'chosen-select tags form-control', multiple: true, autocomplete: "off" }
+		end
+
 	end
 end

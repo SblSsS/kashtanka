@@ -4,8 +4,8 @@ class Post < ActiveRecord::Base
   extend  FriendlyId
 
   friendly_id :title, use: :slugged
-
 	acts_as_translatable :title, :body
+	acts_as_taggable
 
 	#Associations
 	belongs_to :user
@@ -18,6 +18,10 @@ class Post < ActiveRecord::Base
 	accepts_nested_attributes_for :post_image, reject_if: :image_invalid?
 
 	#Methods--------------------------------
+
+	def tag_ids=(ids)
+		self.tag_list = ids.select {|id| id if !id.blank?}.join(',')
+	end
 
 	private
 

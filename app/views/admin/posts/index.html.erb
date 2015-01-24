@@ -1,0 +1,37 @@
+<h1 class="glyphicon glyphicon-list-alt">
+	<%= " #{t(:index, resource: t(:posts), scope: :action_names)}" %>
+	<%= link_to "", new_admin_post_path, class: "glyphicon glyphicon-plus" %>
+</h1>
+
+<div class="row">
+  <div class="md-col-12">
+    <%= render 'filter' %>
+  </div>
+</div>
+
+<% if @posts.any? %>
+  <table class="table table-striped resources">
+    <thead>
+      <th><%= PostImage.model_name.human %></th>
+    	<th><%= Post.human_attribute_name(:title) %></th>
+      <th><%= Post.human_attribute_name(:created_at) %></th>
+      <th><%= Post.human_attribute_name(:published) %></th>
+    	<th></th>
+    </thead>
+    <tbody>
+    	<% @posts.each do |post| %>
+    		<tr>
+          <td><%= link_to image_tag(post.post_image.attachment.url(:thumb)), edit_admin_post_path(post) if post.post_image %></td>
+  	  		<td><%= link_to(post.title, edit_admin_post_path(post)) %></td>
+          <td><%= l(post.created_at, format: :message) %></td>
+          <td><%= link_to("", publish_admin_post_path(post, params.slice(:page)), method: :post, class: publish_class(post)) %></td>
+  	  		<td><%= link_to("", admin_post_path(post), method: :delete, class: "glyphicon glyphicon-remove", data: { confirm: "#{t(:delete_confirmation)}" } ) %></td>
+    		</tr>
+    	<% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate @posts %>
+<% else %>
+  <%= content_tag(:p, t(:nothing_found)) %>
+<% end %>

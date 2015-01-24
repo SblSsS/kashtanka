@@ -41,6 +41,7 @@ module Core
 			@preferences = Setting.create_with(value: true).find_or_create_by(name: "preferences")
 			settings 		 = []
 			settings << @preferences.try(:id)
+			settings << Setting.create_with(value: false).find_or_create_by(name: "multilanguage", parser: "BooleanParser").try(:id)
 			settings << Setting.create_with(value: true).find_or_create_by(name: "enabled", parser: "BooleanParser").try(:id)
 			settings << Setting.create_with(value: "Kashtanka v.1.0.0").find_or_create_by(name: "title").try(:id)
 			Setting.where("id NOT IN (?)",settings).each {|s| s.destroy}

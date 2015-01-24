@@ -1,4 +1,5 @@
 class Language < ActiveRecord::Base
+	include Resoursable
 
 	#Validations
 	validates :name, :iso, presence: true

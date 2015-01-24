@@ -1,0 +1,29 @@
+<%= simple_form_for @post, url: @post.id ? admin_post_path(@post) : admin_posts_path, html: { class: 'col-md-11 col-md-offset-1 resource-form' }, role: 'form' do |f| %>
+
+  <div class="form-group col-md-6">
+  	<%= render partial: 'admin/shared/translatable_form', locals: { form: f, resource: @post } %>
+  </div>
+
+  <div class="form-group col-md-4">
+  	<%= f.input :user_id, as: :hidden, input_html: { class: 'form-control', value: current_user.id } %>
+  	<%= f.input :published, input_html: { class: 'form-control' } %>
+
+  	<% if @post.post_image %>
+  		<%= image_tag @post.post_image.attachment.url(:thumb) %>
+  	<% end %>
+
+  	<% @post.build_post_image if !@post.post_image %>
+
+  	<%= f.fields_for :post_image do |image| %>
+  		<%= image.input :id, as: :hidden %>
+  		<%= image.input :attachment %>
+  	<% end %>
+
+    <%= f.input :slug, input_html: { class: 'form-control' } if @post.id %>
+    <%= tags_input f, @post %>
+  </div>
+
+  <div class="col-md-12">
+  	<%= f.button :submit, class: 'btn btn-default' %>
+  </div>
+<% end %>

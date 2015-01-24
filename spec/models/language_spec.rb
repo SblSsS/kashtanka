@@ -42,6 +42,14 @@ RSpec.describe Language, :type => :model do
 
 	end
 
+	describe 'scopes' do
+
+		it 'is published' do
+			expect(Language.published).to include(english)
+		end
+
+	end
+
 	describe 'methods' do
 
 		it 'can not be destroyed if en' do

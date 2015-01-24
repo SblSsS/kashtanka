@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   extend  FriendlyId
 
   friendly_id :title, use: :slugged
-	acts_as_translatable :title, :body
+	acts_as_translatable :title, body: :ckeditor
 	acts_as_taggable
 
 	#Associations

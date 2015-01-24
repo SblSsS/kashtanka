@@ -15,8 +15,7 @@
 		    	<div role="tabpanel" class="tab-pane <%= l == Language.published.first ? 'active' : '' %>" id="<%= l.iso %>">
 		    		<% resource.class::TRANSLATABLE_FIELDS.each do |field| %>
 		    			<% i += 1 %>
-		    			<%= translation_fieldset t, field, resource, i, l.iso, 
-		    					as: resource.class.columns_hash[field.to_s].type %>
+		    			<%= translation_fieldset t, field, resource, i, l.iso %>
 		    		<% end %>
 		    	</div>
 		    <% end %>

@@ -19,8 +19,11 @@ module Admin
 		end
 
 		def translation_fieldset form, field, object, index, iso, options={}
+			options[:as] = object.class::CKEDITOR_FIELDS.include?(field) ? :ckeditor : object.class.columns_hash[field.to_s].type
+		
 			translation = object.translations.find_by(field_name: field, locale: iso)
 			prefix 			= "#{object.class.name.parameterize}[translations_attributes][#{index}]"
+			id_prefix   = "#{object.class.to_s.parameterize}_#{field.to_s}_#{iso.to_s}"
 
 			if translation
 				id 				= form.input :id, as: :hidden, input_html: {value: translation.id, name: "#{prefix}[id]"}
@@ -28,15 +31,18 @@ module Admin
 				id 				= ''
 			end
 
-			name   			= form.input :field_name, as: :hidden, input_html: {value: field, name: "#{prefix}[field_name]"}
-			iso    			= form.input :locale, as: :hidden, input_html: { value: iso, name: "#{prefix}[locale]" }
+			name   			= form.input :field_name, as: :hidden, input_html: {value: field, name: "#{prefix}[field_name]",
+											id: "#{id_prefix}_field_name"}
+			locale    	= form.input :locale, as: :hidden, input_html: { value: iso, name: "#{prefix}[locale]", 
+											id: "#{id_prefix}_locale" }
 			value  			= form.input :field_translation, label: object.class.human_attribute_name(field),
-											as: options[:as] ? options[:as] : :string, required: false,
+											as: options[:as], required: false,
 											input_html: { value: translation ? translation.field_translation : '',
 											name: "#{prefix}[field_translation]", 
-											class: "form-control #{options[:class] ? options[:class] : ''}" }
+											class: "form-control #{options[:class] ? options[:class] : ''}",
+											id: "#{id_prefix}_field_translation" }
 
-			(id + name + iso + value).html_safe
+			('<div>' + id + name + locale + value + '</div>').html_safe
 		end
 
 		def tags_input form, resource

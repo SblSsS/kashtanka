@@ -11,10 +11,25 @@ module Translatable
 
   module ClassMethods
     def acts_as_translatable *fields
+      
+      field_names   = []
+      editor_fields = []
 
-      self.table_name.singularize.camelize.constantize.const_set(:TRANSLATABLE_FIELDS, fields)
+      fields.each do |field|
+        if field.is_a? Hash
+          field_names += field.keys
+          field.each do |key, value|
+            editor_fields << key if value == :ckeditor
+          end
+        else
+          field_names << field
+        end
+      end
 
-      fields.each do |f|
+      self.table_name.singularize.camelize.constantize.const_set(:TRANSLATABLE_FIELDS, field_names)
+      self.table_name.singularize.camelize.constantize.const_set(:CKEDITOR_FIELDS, editor_fields)
+
+      field_names.each do |f|
         define_method "#{f}" do
           if Settings.config[:multilanguage]
             t = self.translations.find_by(field_name: f.to_s, locale: I18n.locale.to_s).try(:field_translation)

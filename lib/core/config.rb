@@ -44,6 +44,8 @@ module Core
 			settings << Setting.create_with(value: false).find_or_create_by(name: "multilanguage", parser: "BooleanParser").try(:id)
 			settings << Setting.create_with(value: true).find_or_create_by(name: "enabled", parser: "BooleanParser").try(:id)
 			settings << Setting.create_with(value: "Kashtanka v.1.0.0").find_or_create_by(name: "title").try(:id)
+			settings << Setting.create_with(value: "Kashtanka").find_or_create_by(name: "keywords", parser: "TextParser").try(:id)
+			settings << Setting.create_with(value: "simple CMS").find_or_create_by(name: "description", parser: "TextParser").try(:id)
 			Setting.where("id NOT IN (?)",settings).each {|s| s.destroy}
 			Setting.where("id != ?", @preferences.id)
 		end

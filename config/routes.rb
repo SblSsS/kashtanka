@@ -7,6 +7,7 @@ Kashtanka::Application.routes.draw do
 
   namespace :client, path: '' do
     get 'language/:iso', to: "home#language", as: :language 
+    get 'disabled',      to: 'home#disabled'
   end
 
   namespace :admin, path: 'adminka' do

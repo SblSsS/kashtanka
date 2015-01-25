@@ -5,7 +5,8 @@ Kashtanka::Application.routes.draw do
   
   root to: 'client/home#index'
 
-  namespace :client do
+  namespace :client, path: '' do
+    get 'language/:iso', to: "home#language", as: :language 
   end
 
   namespace :admin, path: 'adminka' do

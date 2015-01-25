@@ -23,6 +23,7 @@ en:
   posts:      "Posts"
   name:       "Name"
   filter:     "Filter"
+  under_dev:  "Kashtanka now is under development, sorry ..."
 
   action_names:
     edit: 			"Edit %{resource}"

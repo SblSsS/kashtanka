@@ -1,16 +1,20 @@
-$ksh_grey: #cccccc;
-$ksh_link: #428bca;
+$ksh_grey: 	 #cccccc;
+$ksh_link: 	 #428bca;
+$text_black: #333333;
 
 #admin-content {
-	border-left: 1px solid black;
+	border-left: 1px solid $text_black;
 	padding-left: 20px;
 
 	table.resources {
 		margin-top: 20px;
 		td { vertical-align: middle; }
+		th a { color: $text_black; }
 
 		.publish { color: green; }
 		.unpublish { color: red; }
+
+		i.arrow { font-size: 10px; }
 	}
 
 	form.resource-form {
@@ -43,6 +47,16 @@ $ksh_link: #428bca;
 				li, li input { height: 25px; }
 			}
 		}
+
+		input[type=checkbox] { width: 10px; float: left; }
+
+		div.input { 
+			&.boolean {
+				label { margin-top: 22px; margin-left: 10px; }
+				input { margin-top: 20px; }
+			}
+		}
+
 		.filter-btn { margin-top: 15px; height: 30px; }
 	}
 

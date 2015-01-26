@@ -12,8 +12,8 @@
 <% if @users.any? %>
   <table class="table table-striped resources">
     <thead>
-    	<th><%= t(:name) %></th>
-    	<th><%= t(:email) %></th>
+    	<th><%= sort_link User, params, 'first_name', User.human_attribute_name(:name) %></th>
+    	<th><%= sort_link User, params, 'email' %></th>
     	<th></th>
     </thead>
     <tbody>

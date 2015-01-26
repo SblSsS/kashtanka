@@ -2,7 +2,6 @@ module Resoursable
   extend ActiveSupport::Concern
 
   included do
-    # relations, callbacks, validations, scopes and others...
     scope :published, -> { where(published: true) } 
   end
 
@@ -15,7 +14,9 @@ module Resoursable
   end
 
   module ClassMethods
-
+    def sort field, order
+      all.order("#{self.table_name}.#{field} #{order}")
+    end
   end
 
 end

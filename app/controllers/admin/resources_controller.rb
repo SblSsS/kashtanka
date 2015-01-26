@@ -129,6 +129,10 @@ class Admin::ResourcesController < AdminController
 				col = col.paginate(:page => params[:page], :per_page => 20)
 			end
 
+			if model.respond_to?(:sort) && params[:sort_by] && params[:order]
+				col = col.sort(params[:sort_by],params[:order])
+			end
+
 			col
 		end
 

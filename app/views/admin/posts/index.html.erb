@@ -13,9 +13,10 @@
   <table class="table table-striped resources">
     <thead>
       <th><%= PostImage.model_name.human %></th>
-    	<th><%= Post.human_attribute_name(:title) %></th>
-      <th><%= Post.human_attribute_name(:created_at) %></th>
-      <th><%= Post.human_attribute_name(:published) %></th>
+    	<th><%= sort_link Post, params, 'title' %></th>
+      <th><%= Post.human_attribute_name(:tags) %></th>
+      <th><%= sort_link Post, params, 'created_at' %></th>
+      <th><%= sort_link Post, params, 'published' %></th>
     	<th></th>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
     		<tr>
           <td><%= link_to image_tag(post.post_image.attachment.url(:thumb)), edit_admin_post_path(post) if post.post_image %></td>
   	  		<td><%= link_to(post.title, edit_admin_post_path(post)) %></td>
+          <td><%= post.tag_list %></td>
           <td><%= l(post.created_at, format: :message) %></td>
           <td><%= link_to("", publish_admin_post_path(post, params.slice(:page)), method: :post, class: publish_class(post)) %></td>
   	  		<td><%= link_to("", admin_post_path(post), method: :delete, class: "glyphicon glyphicon-remove", data: { confirm: "#{t(:delete_confirmation)}" } ) %></td>

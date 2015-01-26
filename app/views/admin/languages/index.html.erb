@@ -6,9 +6,9 @@
 <% if @languages.any? %>
   <table class="table table-striped resources">
     <thead>
-    	<th><%= Language.human_attribute_name(:name) %></th>
-    	<th><%= Language.human_attribute_name(:iso) %></th>
-      <th><%= Language.human_attribute_name(:published) %></th>
+    	<th><%= sort_link Language, params, 'name' %></th>
+    	<th><%= sort_link Language, params, 'iso' %></th>
+      <th><%= sort_link Language, params, 'published' %></th>
     	<th></th>
     </thead>
     <tbody>

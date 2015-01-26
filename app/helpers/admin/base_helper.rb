@@ -50,7 +50,7 @@ module Admin
 										input_html: { class: 'chosen-select tags form-control', multiple: true, autocomplete: "off" }
 		end
 
-		def sort_link klass, params, field
+		def sort_link klass, params, field, label=nil
 			if params[:sort_by] == field
 				params[:order] = params[:order] == 'asc' ? 'desc' : 'asc'
 				style = params[:order] == 'desc' ? 'glyphicon glyphicon-arrow-down' : 'glyphicon glyphicon-arrow-up'
@@ -60,10 +60,10 @@ module Admin
 
 			new_hash ||= {}
 
-			arrow = style ? content_tag(:i, '', class: style) : ''
-			link  = link_to klass.human_attribute_name(field), url_for(params.merge(new_hash))
+			arrow = style ? content_tag(:i, '', class: "#{style} arrow") : ''
+			link  = link_to label ? label : klass.human_attribute_name(field), url_for(params.merge(new_hash))
 
-			(link + arrow).html_safe 
+			(link + ' ' + arrow).html_safe 
 				 
 		end
 

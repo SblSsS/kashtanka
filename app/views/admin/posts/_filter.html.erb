@@ -1,0 +1,38 @@
+<%= form_tag admin_posts_path, method: :get, class: 'filter-form', role: 'form' do %>
+	<div class="col-md-3">
+		<div class='row'>
+			<div class='col-md-12'>
+				<%= label_tag :by_title, Post.human_attribute_name(:title) %>
+				<%= text_field_tag :by_title, params[:by_title], class: "form-control" %>
+			</div>
+		</div>
+		<div class='row'>
+			<%= fields_for :by_date do |date| %>
+				<div class='col-md-6'>
+					<%= label_tag :created_at, Post.human_attribute_name(:created_at) %>
+					<%= date.text_field :start, value: params[:by_date] ? params[:by_date][:start] : nil, class: "form-control datepicker" %>
+				</div>
+				<div class='col-md-6'>
+					<%= label_tag :created_at, 'to' %>
+					<%= date.text_field :finish, value: params[:by_date] ? params[:by_date][:finish] : l(DateTime.now), class: "form-control datepicker" %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="row">
+			<%= label_tag :by_tags, Post.human_attribute_name(:tags) %>
+			<%= select_tag :by_tags, options_for_select(Post.tag_counts_on(:tags).map(&:name), params[:by_tags]), multiple: true, class: "form-control chosen-select roles" %>
+		</div>
+		<div class="row">
+			<div class="input boolean">
+				<%= label_tag :by_published, Post.human_attribute_name(:published) %>
+				<%= check_box_tag :by_published, true, params[:by_published] %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<%= submit_tag t(:filter), class: 'btn btn-success filter-btn' %>
+		<%= link_to(t(:refresh), admin_posts_path, class: 'btn btn-info filter-btn') %>
+	</div>
+<% end %>

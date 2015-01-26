@@ -43,6 +43,16 @@ $ksh_link: #428bca;
 				li, li input { height: 25px; }
 			}
 		}
+
+		input[type=checkbox] { width: 10px; float: left; }
+
+		div.input { 
+			&.boolean {
+				label { margin-top: 22px; margin-left: 10px; }
+				input { margin-top: 20px; }
+			}
+		}
+
 		.filter-btn { margin-top: 15px; height: 30px; }
 	}
 

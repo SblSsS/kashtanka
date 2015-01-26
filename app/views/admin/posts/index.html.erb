@@ -13,10 +13,10 @@
   <table class="table table-striped resources">
     <thead>
       <th><%= PostImage.model_name.human %></th>
-    	<th><%= Post.human_attribute_name(:title) %></th>
+    	<th><%= sort_link Post, params, 'title' %></th>
       <th><%= Post.human_attribute_name(:tags) %></th>
-      <th><%= Post.human_attribute_name(:created_at) %></th>
-      <th><%= Post.human_attribute_name(:published) %></th>
+      <th><%= sort_link Post, params, 'created_at' %></th>
+      <th><%= sort_link Post, params, 'published' %></th>
     	<th></th>
     </thead>
     <tbody>

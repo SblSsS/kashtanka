@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include Filterable
+  include Resoursable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

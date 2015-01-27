@@ -17,7 +17,7 @@ Kashtanka::Application.routes.draw do
   	resources :settings
   	resources :languages
 
-  	[:languages, :posts].each do |r|
+  	[:languages, :posts, :slider_images].each do |r|
   		resources r do
   			post :publish, on: :member
   		end

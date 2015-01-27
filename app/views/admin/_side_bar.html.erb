@@ -12,5 +12,8 @@
 		<%= content_tag :li, class: @active_tab == 'posts' ? 'active' : '' do %>
 			<%= link_to(" #{t(:posts)}", admin_posts_path, class: "glyphicon glyphicon-list-alt") %></li>
 		<% end %>
+		<%= content_tag :li, class: @active_tab == 'slider_images' ? 'active' : '' do %>
+			<%= link_to(" #{t(:slider)}", admin_slider_images_path, class: "glyphicon glyphicon-picture") %></li>
+		<% end %>
 	</ul>
 </aside>

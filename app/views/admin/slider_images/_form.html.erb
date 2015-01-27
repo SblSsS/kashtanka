@@ -1,0 +1,15 @@
+<%= simple_form_for @slider_image, url: @slider_image.id ? admin_slider_image_path(@slider_image) : admin_slider_images_path, html: { class: 'col-md-11 col-md-offset-1 resource-form' }, role: 'form' do |f| %>
+
+  <div class="form-group col-md-4">
+  	<% !if @slider_image.attachment.blank? %>
+  		<%= image_tag @slider_image.attachment.url(:thumb) %>
+  	<% end %>
+
+  	<%= f.input :attachment, input_html: { class: '' } %>
+    <%= f.input :alt, input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="col-md-12">
+  	<%= f.button :submit, class: 'btn btn-default' %>
+  </div>
+<% end %>

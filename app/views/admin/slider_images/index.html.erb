@@ -1,0 +1,37 @@
+<h1 class="glyphicon glyphicon-picture">
+	<%= " #{t(:index, resource: t(:slider), scope: :action_names)}" %>
+	<%= link_to "", new_admin_slider_image_path, class: "glyphicon glyphicon-plus" %>
+</h1>
+
+<div class="clear"></div>
+
+<div class="row">
+	<div class="col-md-12">
+		<% if @slider_images.any? %>
+		  <table class="table table-striped resources">
+		    <thead>
+		      <th><%= SliderImage.model_name.human %></th>
+		    	<th><%= sort_link SliderImage, params, 'alt' %></th>
+		      <th><%= SliderImage.human_attribute_name('position') %></th>
+		      <th><%= sort_link SliderImage, params, 'published' %></th>
+		    	<th></th>
+		    </thead>
+		    <tbody>
+		    	<% @slider_images.each do |image| %>
+		    		<tr>
+		          <td><%= link_to image_tag(image.attachment.url(:thumb)), edit_admin_slider_image_path(image) %></td>
+		  	  		<td><%= image.alt %></td>
+		          <td><%= image.position %></td>
+		          <td><%= link_to("", publish_admin_slider_image_path(image, params.slice(:page)), method: :post, class: publish_class(image)) %></td>
+		  	  		<td><%= link_to("", admin_slider_image_path(image), method: :delete, class: "glyphicon glyphicon-remove", data: { confirm: "#{t(:delete_confirmation)}" } ) %></td>
+		    		</tr>
+		    	<% end %>
+		    </tbody>
+		  </table>
+
+		  <%= will_paginate @slider_images %>
+		<% else %>
+		  <%= content_tag(:p, t(:nothing_found)) %>
+		<% end %>
+	</div>
+</div>

@@ -8,6 +8,8 @@ $text_black: #333333;
 
 	table.resources {
 		margin-top: 20px;
+		text-align: center;
+		th { text-align: center; }
 		td { vertical-align: middle; }
 		th a { color: $text_black; }
 

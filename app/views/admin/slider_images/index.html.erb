@@ -29,10 +29,10 @@
 		          	</div>
 		          	<div class="col-md-8">
 		          		<div class="col-md-12">
-		          			<%= link_to "", "", class: 'glyphicon glyphicon-chevron-up' if @slider_images.first != image %>
+		          			<%= link_to "", position_admin_slider_image_path(image, params.merge!(direction: 'up')), method: :post, class: 'glyphicon glyphicon-chevron-up' if @slider_images.first != image %>
 		          		</div>
 		          		<div class="col-md-12">
-		          			<%= link_to "", "", class: 'glyphicon glyphicon-chevron-down' if @slider_images.last != image %>
+		          			<%= link_to "", position_admin_slider_image_path(image, params.merge!(direction: 'down')), method: :post, class: 'glyphicon glyphicon-chevron-down' if @slider_images.last != image %>
 		          		</div>
 		          	</div>
 		          </td>

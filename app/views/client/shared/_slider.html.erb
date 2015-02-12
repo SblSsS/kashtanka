@@ -1,0 +1,18 @@
+<div id="slider">
+  <div class="image-wrapper">
+    <div class="image-box">
+        <% images.each do |image| %>
+            <%= image_tag( image.attachment.url(:slide), data: { number: image.position-1 } ) %>
+        <% end %>
+    </div>
+
+    <%= link_to( '', 'javascript:void(0)', id: 'arrow-right', class: 'arrow glyphicon glyphicon-chevron-right' ) %>
+    <%= link_to( '',  'javascript:void(0)', id: 'arrow-left',  class: 'arrow glyphicon glyphicon-chevron-left' ) %>
+
+    <div class="switcher">
+        <% images.each do |image| %>
+            <%= link_to( '.', 'javascript:void(0)', class: 'go-to', data: { slide: image.position-1 } ) %>
+        <% end %>
+    </div>
+  </div>
+</div>

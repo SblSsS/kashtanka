@@ -1,0 +1,51 @@
+<h1 class="glyphicon glyphicon-picture">
+	<%= " #{t(:index, resource: t(:slider), scope: :action_names)}" %>
+	<%= link_to "", new_admin_slider_image_path, class: "glyphicon glyphicon-plus" %>
+</h1>
+
+<div class="clear"></div>
+
+<div class="row">
+	<div class="col-md-12">
+		<% if @slider_images.any? %>
+		  <table class="table table-striped resources">
+		    <thead>
+		      <th><%= SliderImage.model_name.human %></th>
+		    	<th><%= sort_link SliderImage, params, 'alt' %></th>
+		    	<th><%= sort_link SliderImage, params, 'name' %></th>
+		      <th><%= SliderImage.human_attribute_name('position') %></th>
+		      <th><%= sort_link SliderImage, params, 'published' %></th>
+		    	<th></th>
+		    </thead>
+		    <tbody>
+		    	<% @slider_images.each do |image| %>
+		    		<tr>
+		          <td><%= link_to image_tag(image.attachment.url(:thumb)), edit_admin_slider_image_path(image) %></td>
+		  	  		<td><%= image.alt %></td>
+		  	  		<td><%= image.name %></td>
+		          <td>
+		          	<div class='col-md-4'>
+		          		<%= image.position %>
+		          	</div>
+		          	<div class="col-md-8">
+		          		<div class="col-md-12">
+		          			<%= link_to "", position_admin_slider_image_path(image, params.merge!(direction: 'up')), method: :post, class: 'glyphicon glyphicon-chevron-up' if @slider_images.first != image %>
+		          		</div>
+		          		<div class="col-md-12">
+		          			<%= link_to "", position_admin_slider_image_path(image, params.merge!(direction: 'down')), method: :post, class: 'glyphicon glyphicon-chevron-down' if @slider_images.last != image %>
+		          		</div>
+		          	</div>
+		          </td>
+		          <td><%= link_to("", publish_admin_slider_image_path(image, params.slice(:page)), method: :post, class: publish_class(image)) %></td>
+		  	  		<td><%= link_to("", admin_slider_image_path(image), method: :delete, class: "glyphicon glyphicon-remove", data: { confirm: "#{t(:delete_confirmation)}" } ) %></td>
+		    		</tr>
+		    	<% end %>
+		    </tbody>
+		  </table>
+
+		  <%= will_paginate @slider_images %>
+		<% else %>
+		  <%= content_tag(:p, t(:nothing_found)) %>
+		<% end %>
+	</div>
+</div>

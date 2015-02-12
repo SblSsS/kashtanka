@@ -22,6 +22,19 @@ class Admin::ResourcesController < AdminController
 	end
 
 	def change_position
+		return unless params[:direction]
+
+		direction = params[:direction]
+
+		if direction == 'up'
+			@resource.move_higher
+		else
+			@resource.move_lower
+		end
+
+    respond_to do |format|
+      format.html { redirect_to({action: :index}.merge(params.slice(:page))) }
+    end		
 	end
 
 	def create
@@ -98,7 +111,6 @@ class Admin::ResourcesController < AdminController
 				instance_variable_set( "@#{resource_name}", @resource )
 			else
 				@collection ||= load_collection
-				#Think how to authorize collection
 
 				instance_variable_set( "@#{controller_name}", @collection )
 			end

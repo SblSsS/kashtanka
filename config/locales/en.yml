@@ -17,12 +17,16 @@ en:
       asset:
         attachment: 'Image'
 
+      slider_image:
+        name:       'Slider name'
+
   users: 			"Users"
   languages: 	"Languages"
   settings:		"Settings"
   posts:      "Posts"
   name:       "Name"
   filter:     "Filter"
+  slider:     "Slider"
   under_dev:  "Kashtanka now is under development, sorry ..."
 
   action_names:

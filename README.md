@@ -1,6 +1,6 @@
 # KASHTANKA
 
-Simple CMS.
+Simple CMS on Ruby on Rails.
 
 ## Installation
 
@@ -16,28 +16,27 @@ rake db:setup
 
 ## Settings
 
-You can easily configurate your application by editing the initializer ```kashtanka_config.rb```:
+You can easily configurate your application by editing the initializer ```kashtanka.rb```:
 
 ```ruby
-Settings.configure do |config|
+Core.configure do |config|
     ...
-	config[:setting_name] = setting_value
+	config.setting_name = setting_value
 	...
 end
 ```
 
-OR if you want your settings to be editable via admin panel you should add it in ```lib/core/config.rb```:
+If you want to add more settings you can do it at ```lib/core.rb```:
 
 ```ruby
-...
-	private
+	# Just set new preference with set_pref method
 
-	def load_from_db
-        ...
-		settings << Setting.create_with(value: default_value).find_or_create_by(name: "setting_name", parser: "setting_parser_class_name").try(:id)
-		...
-	end
-...
+	set_pref setting_name, options_hash
+
+	# You can provide the following options as a hash:
+	# db: boolean (save it to database and edit via admin panel)
+	# default: value (setting default value)
+	# parser: "BooleanParser" (setting type parser, string by default)
 ```
 
 ### Parsers

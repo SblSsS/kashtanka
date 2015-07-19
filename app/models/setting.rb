@@ -7,9 +7,6 @@ class Setting < ActiveRecord::Base
 	#Scopes
 	scope :editable, -> { where("name != ?", "preferences").order(:name) }
 
-	#Callbacks
-	after_update :update_config
-
 	serialize :prefs, Hash
 
 	#Methods--------------------------------
@@ -35,17 +32,10 @@ class Setting < ActiveRecord::Base
 		end
 	end
 
-	private
+	def cant_be_blank?
+		field_type != :boolean && field_type != :text
+	end
 
-		def cant_be_blank?
-			field_type != :boolean
-		end
-
-		def update_config
-			if name != "preferences"
-				Settings.refresh
-			end
-		end
 	#---------------------------------------
 
 end

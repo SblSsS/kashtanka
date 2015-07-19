@@ -9,7 +9,7 @@ module Admin
 				options[:checked] = setting.value
 			end
 
-			form.input setting.name, as: setting.field_type,
+			form.input setting.name, as: setting.field_type, required: setting.cant_be_blank?,
 					input_html: options
 
 		end

@@ -31,7 +31,7 @@ module Translatable
 
       field_names.each do |f|
         define_method "#{f}" do
-          if Settings.config[:multilanguage]
+          if Core.multilanguage
             t = self.translations.find_by(field_name: f.to_s, locale: I18n.locale.to_s).try(:field_translation)
             t || self.read_attribute(f.to_sym)
           else

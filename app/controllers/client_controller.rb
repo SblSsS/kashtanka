@@ -5,11 +5,11 @@ class ClientController < ApplicationController
 	private
 
 	def load_publics
-		@title = Settings.config[:title]
+		@title = Core.title
 	end
 
   def enabled?
-    if !Settings.config[:enabled]
+    if !Core.enabled
       redirect_to client_disabled_path
     end
   end

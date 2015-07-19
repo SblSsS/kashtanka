@@ -3,6 +3,6 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <title><%= @title %></title>
-  <meta name="keywords" content="<%= Settings.config[:keywords] %>" />
-  <meta name="description" content="<%= Settings.config[:description] %>" />
+  <meta name="keywords" content="<%= Core.keywords %>" />
+  <meta name="description" content="<%= Core.description %>" />
 </head>

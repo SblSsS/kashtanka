@@ -11,7 +11,7 @@ class AdminController < ApplicationController
 	end
 
 	def load_publics
-		@title = Settings.config[:title]
+		@title = Core.title
 	end
 
 	def set_language
